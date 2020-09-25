@@ -1,0 +1,63 @@
+<!-- TO READ ATTRIBUTES MENTIONED IN CONTROLLER AND DISPLAY IT IN BROWSER-->
+
+<!DOCTYPE html>
+
+<!--/*thymeleaf namespace which is used to pull values from model*/-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Corona Virus Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <style>
+        h1{
+        font-size: 3.3rem !important;
+        }
+        .display-4 {
+        font-size: 3rem !important;
+        font-weight: initial !important;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--/*<p th:text="${testName}"></p>//looking up attribute that was set in model of controller and displaying it in browser*/-->
+
+<!--To display sum of total cases in a jumbotron -->
+<div class="container">
+    <h1 class="text-center">Corona Virus Tracker Application</h1>
+<p class="text-center">This application lists the current number of cases reported across the globe.  </p>
+<div class="jumbotron ">
+    <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+    <p >Total number of cases reported as of today.</p>
+    <hr class="my-4">
+    <h4 class="display-4" th:text="${newReportedCases}"></h4>
+    <p>Total number of new cases reported since the previous day.</p>
+
+</div>
+
+<!--To loop through the attribute locationInfo(list) and display it in the browser -->
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Country</th>
+        <th>State</th>
+        <th>New Cases Reported</th>
+        <th>Total Cases Reported</th>
+    </tr>
+    <!-- loop variable name: locationInf -->
+    <!-- actual variable we are looping over: locationInfo -->
+    <tr th:each="locationInf : ${locationInfo}">
+        <td th:text="${locationInf.country}"></td>
+        <td th:text="${locationInf.state}"></td>
+        <td th:text="${locationInf.diffFromPrevDay}">0</td>
+        <td th:text="${locationInf.latestCases}">0</td>
+    </tr>
+</table>
+</div>
+
+</body>
+
+</html>
